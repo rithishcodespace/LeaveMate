@@ -56,7 +56,7 @@ let PendingRequest = () =>{
                 <tbody>
                         {pendingData.length!=0 &&
                           pendingData.map((pending,index)=>(
-                             <tr className="border-purple-600">
+                             <tr key={index} className="border-purple-600">
                                 <td className="border border-violet-500 px-4 py-2">{pending.id}</td>
                                 <td className="border border-violet-500 px-4 py-2">{pending.name}</td>
                                 <td className="border border-violet-500 px-4 py-2">{pending.department}</td>

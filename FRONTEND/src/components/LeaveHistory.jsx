@@ -42,7 +42,7 @@ let LeaveHistory = () =>{
               <p className="text-purple-500 text-3xl font-mono relative left-72 mb-4">Leave History</p>
               {history.length!=0 && 
                history.map((history,index)=>(
-                <div className="h-auto w-[800px] bg-slate-900 shadow-purple-700 shadow-lg rounded-md">
+                <div key={index} className="h-auto w-[800px] bg-slate-900 shadow-purple-700 shadow-lg rounded-md">
                   <div className="p-2">
                     <p>📅 {history.from} to :{history.to}</p>
                   </div>

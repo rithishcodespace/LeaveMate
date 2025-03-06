@@ -15,16 +15,17 @@ import ProtectedRoute from "./components/ProtectedRoute"
 const route = createBrowserRouter([
 {
   path:"/",
-  // element:<Navigate to="/login" />  
-  element:<AdminDashboard/>  
+  element:<Navigate to="/login" />  
+  // element:<AdminDashboard/>  
 },
 {
   path:"/login",
   element:<Login/>
 },
 {
-  path:"dashboard",
+  path:"/dashboard",
   element:<ProtectedRoute element={<Body/>} allowedRoles={["student"]}/>,
+  // element:<Body/>,
   children:[
     {
       path:"",

@@ -21,25 +21,25 @@ let Login = () =>{
             headers:{"Content-Type":"application/json"}
         })
         .then((response)=>{
-            if(response.status == 200)
-            {
-                alert("login successful");
-                navigate("/dashboard")
-            }
-            else
+            if(!response.status == 200)
             {
                 console.log("an error occured while applying leave")
             }
         })
 
-        axios.post("http://localhost:5000/role",username,emailId,password,{
+        axios.post("http://localhost:5000/role",{username,emailId,password},{
           headers:{"Content-Type":"application/json"}  
         })
-        .then((response)=>{
-            if(response.status == 200)
+        .then((responsedata)=>{
+            if(responsedata.status == 200)
             {
-              dispatch(login(response.data.role));
-              if(response.data.role == "student") ?  
+              dispatch(login(responsedata.data.role));
+              alert(`logedIn successfully as ${responsedata.data.role}`)
+              navigate(responsedata.data.role === "student" ? "/dashboard" : "/admin");
+            }
+            else
+            {
+                console.log("role not found")
             }
         })
     }

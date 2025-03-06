@@ -11,7 +11,7 @@ const loggedinslice = createSlice({
     reducers:{
         login:(state,action)=>{
             state.loggedIn = true,
-            state.role = action.payload.role,
+            state.role = action.payload,
             localStorage.setItem("authState",JSON.stringify(state))
         },
         logout:(state,action)=>{

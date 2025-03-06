@@ -41,7 +41,7 @@ let Notifications = () =>{ //it will send you a notification when mentor approve
     return(
         <div className="flex justify-center items-center">
             {notifications && notifications.map((noti,index)=>(
-              <div className="text-purple-500 text-3xl font-mono relative left-72">
+              <div key={index} className="text-purple-500 text-3xl font-mono relative left-72">
                 <p>{notifications.message}</p>
               </div>
             ))
