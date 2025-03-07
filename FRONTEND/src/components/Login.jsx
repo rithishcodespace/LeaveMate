@@ -43,17 +43,50 @@ let Login = () =>{
             }
         })
     }
+    function handleSignin()
+    {
+      navigate("/signup");
+    }
     return(
-       
-        <div className="flex justify-center items-center bg-gradient-to-r from-black via-gray-800 to-black min-h-screen">
-            <div className="flex justify-center items-center bg-slate-800 w-96 flex-col relative h-[350px] rounded-2xl">
-                <p className="text-2xl font-mono absolute top-5 text-white">Login</p>
-                <input ref={usernameRef} type="text" placeholder="  Username" className="bg-gray-700 text-white px-4 py-2 rounded-md w-64 m-2 h-10 outline-none focus:ring-2 focus:ring-purple-500 relative bottom-4 placeholder:text-black"/>
-                <input ref={emailRef} type="text" placeholder="  EmailId" className="bg-gray-700 text-white px-4 py-2 rounded-md w-64 m-2 h-10 outline-none focus:ring-2 focus:ring-purple-500 relative bottom-4 placeholder:text-black"/>
-                <input ref={passRef} type="text" placeholder="  Password" className="bg-gray-700 text-white px-4 py-2 rounded-md w-64 m-2 h-10 outline-none focus:ring-2 focus:ring-purple-500 relative bottom-4 placeholder:text-black"/>
-                <button className=" bg-purple-500  hover:bg-purple-600 transition-all duration-200 w-64 h-10 rounded-md relative top-5 cursor-pointer" onClick={handleLogin}>login</button>
-            </div>
-        </div>
+        <div className="flex justify-center items-center bg-gradient-to-r from-black via-gray-900 to-black min-h-screen p-4">
+          <div className="flex flex-col justify-center items-center bg-gray-800 w-96 p-8 rounded-2xl shadow-lg shadow-gray-700 relative">
+            <p className="text-3xl font-semibold text-white mb-6">Login</p>
+
+            <input
+            ref={usernameRef}
+            type="text"
+            placeholder="Username"
+            className="bg-gray-700 text-white px-4 py-3 rounded-md w-full mb-3 h-12 outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-400"
+            />
+
+            <input
+            ref={emailRef}
+            type="text"
+            placeholder="Email ID"
+            className="bg-gray-700 text-white px-4 py-3 rounded-md w-full mb-3 h-12 outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-400"
+            />
+
+            <input
+            ref={passRef}
+            type="text"
+            placeholder="Password"
+            className="bg-gray-700 text-white px-4 py-3 rounded-md w-full mb-4 h-12 outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-400"
+            />
+
+            <button
+            className="bg-purple-500 hover:bg-purple-600 transition-all duration-200 w-full h-12 rounded-md text-white text-lg font-medium shadow-md hover:shadow-lg"
+            onClick={handleLogin}
+            >Login</button>
+
+            <p className="text-gray-400 mt-4 text-sm">
+            Are you new to <span className="text-purple-400 font-semibold">LeaveMate</span>?{" "}
+            <span className="text-red-500 cursor-pointer hover:underline" onClick={handleSignin}>
+             Signup now!
+            </span>
+            </p>
+  </div>
+</div>
+
         
     )
 }

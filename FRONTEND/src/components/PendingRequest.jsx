@@ -11,34 +11,26 @@ let PendingRequest = () =>{
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        async function fetchData()
+        function fetchData()
         {
-            // try{
-            //     const pending = axios.get("http://localhost:5000/pending")
-            //     .then((response)=>{
-            //      if(!response.ok)
-            //      {
-            //          alert("There is an error in fetching the pending data");
-            //      }
-            //      else
-            //      {
-            //          setpendingData(pending.data);
-            //      }
-            //     })
-            // }
-            // catch(error)
-            // {
-            //     alert("There is an error in fetch the pending data",error)
-            // }
-            setpendingData([{
-                id:1,
-                name:"Rithish",
-                department:"cse",
-                fromdate:7,
-                todate:9,
-                reason:"home fest",
-                status:"pending"
-            }])
+            try{
+                axios.get("http://localhost:5000/fetchpending")
+                .then((response)=>{
+                 if(response.status != 200)
+                 {
+                     alert("There is an error in fetching the pending data");
+                 }
+                 else
+                 {
+                     setpendingData(response.data);
+                     if(response.data.length==0)alert("NO HISTORY FOUND");
+                 }
+                })
+            }
+            catch(error)
+            {
+                alert("There is an error in fetch the pending data",error)
+            }
         }
         fetchData();
     },[]);
@@ -75,7 +67,7 @@ let PendingRequest = () =>{
                                 <td className="border border-violet-500 px-4 py-2">{pending.fromdate}</td>
                                 <td className="border border-violet-500 px-4 py-2">{pending.todate}</td>
                                 <td className="border border-violet-500 px-4 py-2">{pending.reason}</td>
-                                <td className="border border-violet-500 px-4 py-2 bg-yellow-600">{pending.status}</td>
+                                <td className="border border-violet-500 px-4 py-2 bg-yellow-600">pending</td>
                              </tr>
                           ))
                         }

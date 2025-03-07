@@ -11,34 +11,27 @@ let LeaveHistory = () =>{
     const navigate = useNavigate();
     const dispatch = useDispatch();
     useEffect(()=>{
-        // function getData()
-        // {
-        //     try{
-        //         const his = axios.get("http://localhost:5000/history")
-        //         .then((response)=>{
-        //             if(!response.ok || response.data.length<0)
-        //             {
-        //                 alert("History not found")
-        //             }
-        //             else
-        //             {
-        //                 sethistory(response.data)
-        //             }
-        //         })
-        //     }
-        //     catch(error){
-        //         console.log("ERROR:",error);
-        //     }
-        // } 
-        sethistory([{
-            id:1,
-            name:"Rithish",
-            department:"cse",
-            fromdate:7,
-            todate:9,
-            reason:"home fest",
-            status:"accepted"
-        }])  
+        function getData()
+        {
+            try{
+                axios.get("http://localhost:5000/history")
+                .then((response)=>{
+                    if(response.status != 200 || response.data.length<0)
+                    {
+                        alert("History not found")
+                    }
+                    else
+                    {
+                        sethistory(response.data);
+                        console.log(response.data);
+                    }
+                })
+            }
+            catch(error){
+                console.log("ERROR:",error);
+            }
+        } 
+        getData();
     },[]);
 
     function handleLogout()
@@ -54,12 +47,12 @@ let LeaveHistory = () =>{
               <p className="text-purple-500 text-3xl font-mono relative left-72 mb-4">Leave History</p>
               {history.length!=0 && 
                history.map((history,index)=>(
-                <div key={index} className="h-auto w-[800px] bg-slate-900 shadow-purple-700 shadow-lg rounded-md">
+                <div key={index} className="h-auto w-[800px] bg-slate-900 shadow-purple-700 shadow-lg rounded-md m-5">
                   <div className="p-2">
-                    <p>📅 {history.from} to :{history.to}</p>
+                    <p>📅 {history.fromdate} to :{history.todate}</p>
                   </div>
                   <p className="p-2">📝 {history.reason}</p>
-                  {(history.status == "approved") ? <span className="text-green-500 p-3 text-xl font-serif">Approved</span> : (history.status=="pending") ? <span className="text-amber-500 p-2 text-xl font-serif">Pending</span> : <span className="text-red-500 p-3 text-xl font-serif">Rejected</span>}
+                  {(history?.status == "accepted") ? <span className="text-green-500 p-3 text-xl font-serif">Approved</span> : (history?.status=="pending") ? <span className="text-amber-500 p-2 text-xl font-serif">Pending</span> : <span className="text-red-500 p-3 text-xl font-serif">Rejected</span>}
                 </div>
                ))
               }

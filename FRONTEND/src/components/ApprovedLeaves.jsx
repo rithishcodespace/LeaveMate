@@ -11,34 +11,26 @@ let ApprovedLeaves = () =>{
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        async function fetchData()
+        function fetchData()
         {
-            // try{
-            //     const pending = axios.get("http://localhost:5000/accepted")
-            //     .then((response)=>{
-            //      if(!response.ok)
-            //      {
-            //          alert("There is an error in fetching the pending data");
-            //      }
-            //      else
-            //      {
-            //          setpendingData(pending.data);
-            //      }
-            //     })
-            // }
-            // catch(error)
-            // {
-            //     alert("There is an error in fetch the pending data",error)
-            // }
-            setacceptedData([{
-                id:1,
-                name:"Rithish",
-                department:"cse",
-                fromdate:7,
-                todate:9,
-                reason:"home fest",
-                status:"accepted"
-            }])
+            try{
+                axios.get("http://localhost:5000/accepted")
+                .then((response)=>{
+                 if(response.status != 200)
+                 {
+                     alert("There is an error in fetching the pending data");
+                 }
+                 else
+                 {
+                     setacceptedData(response.data);
+                     if(response.data.length==0)alert("NO PENDING APPLICATIONS FOUND")
+                 }
+                })
+            }
+            catch(error)
+            {
+                alert("There is an error in fetch the pending data",error)
+            }
         }
         fetchData();
     },[]);
@@ -58,7 +50,7 @@ let ApprovedLeaves = () =>{
                     <tr className="border-purple-600 border-b-4 border">
                         <th className="border border-violet-500 px-4 py-2">S.no</th>
                         <th className="border border-violet-500 px-4 py-2">Name</th>
-                        <th className="border border-violet-500 px-4 py-2">Department</th>
+                        <th className="border border-violet-500 px-4 py-2">EmailId</th>
                         <th className="border border-violet-500 px-4 py-2">From date</th>
                         <th className="border border-violet-500 px-4 py-2">To date</th>
                         <th className="border border-violet-500 px-4 py-2">Reason</th>
@@ -75,7 +67,7 @@ let ApprovedLeaves = () =>{
                                 <td className="border border-violet-500 px-4 py-2">{pending.fromdate}</td>
                                 <td className="border border-violet-500 px-4 py-2">{pending.todate}</td>
                                 <td className="border border-violet-500 px-4 py-2">{pending.reason}</td>
-                                <td className="border border-violet-500 px-4 py-2 bg-green-600">{pending.status}</td>
+                                <td className="border border-violet-500 px-4 py-2 bg-green-600">accepted</td>
                              </tr>
                           ))
                         }

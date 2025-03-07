@@ -12,34 +12,26 @@ let RejectedLeaves = () =>{
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        async function fetchData()
+        function fetchData()
         {
-            // try{
-            //     const pending = axios.get("http://localhost:5000/rejected")
-            //     .then((response)=>{
-            //      if(!response.ok)
-            //      {
-            //          alert("There is an error in fetching the pending data");
-            //      }
-            //      else
-            //      {
-            //          setpendingData(pending.data);
-            //      }
-            //     })
-            // }
-            // catch(error)
-            // {
-            //     alert("There is an error in fetch the pending data",error)
-            // }
-            setrejectedData([{
-                id:1,
-                name:"Rithish",
-                department:"cse",
-                fromdate:7,
-                todate:9,
-                reason:"home fest",
-                status:"rejected"
-            }])
+            try{
+                axios.get("http://localhost:5000/rejected")
+                .then((response)=>{
+                 if(response.status != 200)
+                 {
+                     alert("There is an error in fetching the pending data");
+                 }
+                 else
+                 {
+                     setrejectedData(response.data);
+                     if(response.data.length==0)alert("NO REJECTED APPLICATIONS FOUND");
+                 }
+                })
+            }
+            catch(error)
+            {
+                alert("There is an error in fetch the pending data",error)
+            }
         }
         fetchData();
     },[]);
@@ -67,7 +59,7 @@ let RejectedLeaves = () =>{
                     </tr>
                 </thead>
                 <tbody>
-                        {rejectedData.length!=0 &&
+                        {rejectedData.length!=0  &&
                           rejectedData.map((pending,index)=>(
                              <tr  key={index} className="border-purple-600">
                                 <td className="border border-violet-500 px-4 py-2">{pending.id}</td>
@@ -76,7 +68,7 @@ let RejectedLeaves = () =>{
                                 <td className="border border-violet-500 px-4 py-2">{pending.fromdate}</td>
                                 <td className="border border-violet-500 px-4 py-2">{pending.todate}</td>
                                 <td className="border border-violet-500 px-4 py-2">{pending.reason}</td>
-                                <td className="border border-violet-500 px-4 py-2 bg-red-600">{pending.status}</td>
+                                <td className="border border-violet-500 px-4 py-2 bg-red-600">rejected</td>
                              </tr>
                           ))
                         }

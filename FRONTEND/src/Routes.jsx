@@ -9,7 +9,8 @@ import Notifications from "./components/Notifications";
 import PendingRequest from "./components/PendingRequest";
 import Applyleave from "./components/Applyleave";
 import AdminDashboard from "./components/AdminDashboard";
-import ProtectedRoute from "./components/ProtectedRoute"
+import ProtectedRoute from "./components/ProtectedRoute";
+import Signup from "./components/signup"
 
 
 const route = createBrowserRouter([
@@ -23,9 +24,12 @@ const route = createBrowserRouter([
   element:<Login/>
 },
 {
+  path:"/signup",
+  element:<Signup/>
+},
+{
   path:"/dashboard",
-  element:<ProtectedRoute element={<Body/>} allowedRoles={["student"]}/>,
-  // element:<Body/>,
+  element:<ProtectedRoute allowedRoles={["student"]}><Body/></ProtectedRoute>,
   children:[
     {
       path:"",
@@ -59,7 +63,7 @@ const route = createBrowserRouter([
 },
 {
   path:"/admin",
-  element:<ProtectedRoute element={<AdminDashboard/>} allowedRoles={["admin"]}/>
+  element:<ProtectedRoute allowedRoles={["admin"]}><AdminDashboard/></ProtectedRoute>
 }
 ])
 

@@ -26,14 +26,7 @@ let AdminDashboard = () =>{
         console.log("There is an problem in fetching leave requests");
       }
      })
-    // setleaveRequest([{
-    //    name:"Rithish",
-    //    department:"computer science and engineering",
-    //    fromdate:"05-11-2025",
-    //    todate:"10-11-2025",
-    //    reason:"home fest",
-    //    status:"accepted"
-    // }])
+    
   }
   fetchData();
   },[])
@@ -53,6 +46,8 @@ let AdminDashboard = () =>{
         console.log("There is a problem in accepting the application")
       }
     })
+
+    // axios.post("http://localhost:5000/notify",)
   }
 
   function rejectapplication(id)
@@ -83,9 +78,9 @@ let AdminDashboard = () =>{
       <button className="text-blue-600 font-sans font-bold absolute top-5 right-[1430px] cursor-pointer">ADMIN DASHBOARD</button>
        <button className="p-2 bg-blue-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-blue-900" onClick={handleLogout}>Logout</button>
       <div className="mt-8">
-         <p className="font-mono text-3xl text-blue-600 relative left-68 mb-6">Leave Requests</p>
+         {leaveRequests &&<p className="font-mono text-3xl text-blue-600 relative left-68 mb-6">Leave Requests</p>}
          {leaveRequests && leaveRequests.map((request,index)=>(
-           <div className="w-full sm:w-[800px] bg-slate-900 shadow-blue-700 shadow-lg rounded-md flex flex-wrap sm:flex-nowrap justify-between items-center overflow-y-auto p-3 min-h-[150px]">
+           <div key={index} className="w-full sm:w-[800px] bg-slate-900 shadow-blue-700 shadow-lg rounded-md flex flex-wrap sm:flex-nowrap justify-between items-center overflow-y-auto p-3 min-h-[150px]">
            <p className="p-2 text-white min-w-[100px]">{request.name}</p>
            <p className="p-2 text-white min-w-[150px]">{request.department}</p>
            <div className="p-2 text-white">
@@ -95,8 +90,8 @@ let AdminDashboard = () =>{
              {request.reason}
            </p>
            <div className="flex space-x-2">
-             <button className="text-white bg-green-500 p-2 cursor-pointer hover:bg-green-700 rounded-lg" onClick={acceptapplication}>Accept</button>
-             <button className="text-white bg-red-600 p-1.5 w-16 rounded-lg hover:bg-red-700 cursor-pointer" onClick={rejectapplication}>Reject</button>
+             <button className="text-white bg-green-500 p-2 cursor-pointer hover:bg-green-700 rounded-lg" onClick={()=>acceptapplication(request.id)}>Accept</button>
+             <button className="text-white bg-red-600 p-1.5 w-16 rounded-lg hover:bg-red-700 cursor-pointer" onClick={()=>rejectapplication(request.id)}>Reject</button>
            </div>
          </div>         
          ))
