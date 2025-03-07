@@ -1,8 +1,14 @@
 import { useEffect } from "react";
 import {useState} from "react"
 import axios from "axios";
+import { logout } from "../utils/loggedinslice";
+import {useDispatch} from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 let AdminDashboard = () =>{
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const [leaveRequests,setleaveRequest] = useState([]);
   useEffect(()=>{
@@ -31,8 +37,15 @@ let AdminDashboard = () =>{
   fetchData();
   },[])
 
+  function handleLogout()
+  {
+    dispatch(logout());
+    navigate("/login");
+  }
+
   return(
     <div className="bg-black flex justify-center h-screen">
+       <button className="p-2 bg-blue-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-blue-900" onClick={handleLogout}>Logout</button>
       <div className="mt-8">
          <p className="font-mono text-3xl text-blue-600 relative left-68 mb-6">Leave Requests</p>
          {leaveRequests && leaveRequests.map((request,index)=>(

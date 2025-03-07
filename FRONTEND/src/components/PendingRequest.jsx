@@ -1,9 +1,14 @@
 import {useEffect,useState} from "react"
-import axios from "axios"
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../utils/loggedinslice";
 
 let PendingRequest = () =>{
 
     const[pendingData,setpendingData] = useState([]);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(()=>{
         async function fetchData()
@@ -38,8 +43,15 @@ let PendingRequest = () =>{
         fetchData();
     },[]);
 
+    function handleLogout()
+    {
+        dispatch(logout());
+        navigate("/login");
+    }
+
     return(
         <div className="flex items-center justify-center">
+             <button className="p-2 bg-violet-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-violet-900" onClick={handleLogout}>Logout</button>
            <div>
               <table className="border-spacing-1  w-[850px] border-separate border border-violet-600 overflow-x-hidden overflow-y-scroll">
                 <thead>

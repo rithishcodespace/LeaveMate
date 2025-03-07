@@ -2,10 +2,15 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, Typography, LinearProgress, Box } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../utils/loggedinslice";
 
 const LeaveBalance = () => {
   const [leavePercentage, setLeavePercentage] = useState(75);
   const [quote, setQuote] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
@@ -22,8 +27,15 @@ const LeaveBalance = () => {
     }, 1000);
   }, []);
 
+  function handleLogout()
+  {
+      dispatch(logout());
+      navigate("/login");
+  }
+
   return (
     <Box className="flex items-center justify-center min-h-screen bg-black">
+       <button className="p-2 bg-violet-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-violet-900" onClick={handleLogout}>Logout</button>
       <motion.div 
         initial={{ opacity: 0, y: -20 }} 
         animate={{ opacity: 1, y: 0 }} 

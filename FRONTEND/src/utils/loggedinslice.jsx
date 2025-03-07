@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const persistedState = JSON.parse(localStorage.getItem("authState")) || {
+const persistedState = JSON.parse(sessionStorage.getItem("authState")) || {
     loggedIn:false,
     role:null
 }
@@ -12,12 +12,12 @@ const loggedinslice = createSlice({
         login:(state,action)=>{
             state.loggedIn = true,
             state.role = action.payload,
-            localStorage.setItem("authState",JSON.stringify(state))
+            sessionStorage.setItem("authState",JSON.stringify(state))
         },
         logout:(state,action)=>{
             state.loggedIn=false,
             state.role=null,
-            localStorage.removeItem("authState");
+            sessionStorage.removeItem("authState");
         }
     }
 })

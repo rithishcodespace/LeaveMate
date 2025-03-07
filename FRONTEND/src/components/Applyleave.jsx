@@ -1,7 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
+import {useDispatch} from "react-redux";
+import { logout } from "../utils/loggedinslice";
+import { useNavigate } from "react-router-dom";
+
 
 const Applyleave = () => {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const[leavetype,setleavetype] = useState("");
     const[fromdate,setfromdate] = useState("");
@@ -35,9 +42,16 @@ const Applyleave = () => {
         
     }
 
+    function handleLogout()
+    {
+      dispatch(logout());
+      navigate("/login");
+    }
+
 
     return (
       <div className="flex justify-center items-center h-screen bg-black text-white max-w-screen">
+      <button className="p-2 bg-violet-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-violet-900" onClick={handleLogout}>Logout</button>
         <div className="bg-[#1a1a2e] p-8 rounded-xl shadow-lg w-[500px] mb-8">
           <h2 className="text-xl font-bold text-purple-400 text-center mb-4">
             Apply for Leave
