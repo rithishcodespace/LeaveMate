@@ -1,6 +1,6 @@
 import {useState,useEffect} from "react";
 import axios from "axios";
-import { spacing } from "@mui/system";
+// import { spacing } from "@mui/system";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../utils/loggedinslice";
@@ -47,7 +47,7 @@ let LeaveHistory = () =>{
               <p className="text-purple-500 text-3xl font-mono relative left-72 mb-4">Leave History</p>
               {history.length!=0 && 
                history.map((history,index)=>(
-                <div key={index} className="h-auto w-[800px] bg-slate-900 shadow-purple-700 shadow-lg rounded-md m-5">
+                <div key={index} className="h-auto w-[800px] bg-slate-900 shadow-purple-700 shadow-md rounded-md m-5">
                   <div className="p-2">
                     <p>📅 {history.fromdate} to :{history.todate}</p>
                   </div>
