@@ -41,13 +41,13 @@ let LeaveHistory = () =>{
     }
 
     return(
-        <div className="flex justify-center items-center ">
+        <div className="flex justify-center items-center overflow-auto">
            <button className="p-2 bg-violet-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-violet-900" onClick={handleLogout}>Logout</button>
             <div>
               <p className="text-purple-500 text-3xl font-mono relative left-72 mb-4">Leave History</p>
               {history.length!=0 && 
                history.map((history,index)=>(
-                <div key={index} className="h-auto w-[800px] bg-slate-900 shadow-purple-700 shadow-md rounded-md m-5">
+                <div key={index} className="h-auto w-[800px] bg-slate-900 hover:scale-105 duration-300 shadow-sm shadow-violet-500 rounded-md m-5">
                   <div className="p-2">
                     <p>📅 {history.fromdate} to :{history.todate}</p>
                   </div>

@@ -75,13 +75,13 @@ let AdminDashboard = () =>{
   }
 
   return(
-    <div className="bg-black flex justify-center h-screen">
+    <div className="bg-black flex justify-center h-screen overflow-auto">
       <button className="text-blue-600 font-sans font-bold absolute top-5 right-[1430px] cursor-pointer">ADMIN DASHBOARD</button>
        <button className="p-2 bg-blue-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-blue-900" onClick={handleLogout}>Logout</button>
       <div className="mt-8">
          {leaveRequests &&<p className="font-mono text-3xl text-blue-600 relative left-68 mb-6">Leave Requests</p>}
          {leaveRequests && leaveRequests.map((request,index)=>(
-           <div key={index} className="w-full sm:w-[800px] bg-slate-900 shadow-blue-700 shadow-lg rounded-md flex flex-wrap sm:flex-nowrap justify-between items-center overflow-y-auto p-3 min-h-[150px]">
+           <div key={index} className="h-auto w-[800px] bg-slate-900 hover:scale-105 duration-300 shadow-sm shadow-blue-600 rounded-md m-5">
            <p className="p-2 text-white min-w-[100px]">{selector.name}</p>
            <p className="p-2 text-white min-w-[150px]">{selector.emailId}</p>
            <div className="p-2 text-white">

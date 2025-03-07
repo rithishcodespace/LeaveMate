@@ -25,7 +25,6 @@ let ApprovedLeaves = () =>{
                  else
                  {
                      setacceptedData(response.data);
-                     if(response.data.length==0)alert("NO PENDING APPLICATIONS FOUND")
                  }
                 })
 
@@ -48,8 +47,8 @@ let ApprovedLeaves = () =>{
         <div className="flex items-center justify-center ">
              <button className="p-2 bg-violet-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-violet-900" onClick={handleLogout}>Logout</button>
            <div>
-              <table className="border-spacing-1 border-separate border border-violet-600 overflow-x-hidden overflow-y-scroll w-[850px]">
-                <thead>
+           {acceptedData.length!=0 && <table className="border-spacing-1 border-separate border border-violet-600 overflow-x-hidden overflow-y-scroll w-[850px]">
+               <thead>
                     <tr className="border-purple-600 border-b-4 border">
                         <th className="border border-violet-500 px-4 py-2">Name</th>
                         <th className="border border-violet-500 px-4 py-2">EmailId</th>
@@ -60,7 +59,7 @@ let ApprovedLeaves = () =>{
                     </tr>
                 </thead>
                 <tbody>
-                        {acceptedData.length!=0 &&
+                        {
                           acceptedData.map((pending,index)=>(
                              <tr key={index} className="border-purple-600">
                                 <td className="border border-violet-500 px-4 py-2">{selector.name}</td>
@@ -72,8 +71,13 @@ let ApprovedLeaves = () =>{
                              </tr>
                           ))
                         }
+                        {acceptedData.length==0 &&
+                            <div className="flex justify-center items relative top-56">
+                                <p className="font-light text-4xl">NO PENDING APPLICATIONS FOUND</p>
+                            </div>          
+                        }
                 </tbody>
-              </table>
+              </table>}
            </div>
         </div>
     )

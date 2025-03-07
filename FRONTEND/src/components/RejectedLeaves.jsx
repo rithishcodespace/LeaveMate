@@ -47,9 +47,9 @@ let RejectedLeaves = () =>{
         <div className="flex items-center justify-center ">
              <button className="p-2 bg-violet-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-violet-900" onClick={handleLogout}>Logout</button>
            <div>
-              <table className="border-spacing-1  w-[850px] border-separate border border-violet-600 overflow-x-hidden overflow-y-scroll">
+              {rejectedData.length!=0 &&<table className="border-spacing-1  w-[850px] border-separate border border-violet-600 overflow-x-hidden overflow-y-scroll">
                 <thead>
-                    <tr className="border-purple-600 border-b-4 border">
+                     <tr className="border-purple-600 border-b-4 border">
                         <th className="border border-violet-500 px-4 py-2">Name</th>
                         <th className="border border-violet-500 px-4 py-2">EmailId</th>
                         <th className="border border-violet-500 px-4 py-2">From date</th>
@@ -71,8 +71,13 @@ let RejectedLeaves = () =>{
                              </tr>
                           ))
                         }
+                        {rejectedData.length==0 &&
+                            <div className="flex justify-center items relative top-56">
+                                <p className="font-light text-4xl">NO PENDING APPLICATIONS FOUND</p>
+                            </div>          
+                        }
                 </tbody>
-              </table>
+              </table>}
            </div>
         </div>
     )
