@@ -7,11 +7,13 @@ const authRoute = require("./routes/authRoute");
 const db = require("./database");
 const applyleaveRoute = require("./routes/applyleave");
 const fetchRoute = require("./routes/fetchRoute");
+const adminRoute = require("./routes/adminRoute");
 
 app.use(express.json());
 app.use(cors());
 app.use("/",authRoute);
 app.use("/",applyleaveRoute);
 app.use("/",fetchRoute);
+app.use("/",adminRoute);
 app.listen(PORT,()=>console.log(`sever successfully running on localhost:${PORT}`));
 

@@ -26,7 +26,11 @@ const Applyleave = () => {
             headers:{"Content-Type":"application/json"}
           })
           .then((response)=>{
-            if(response.status==200)alert("Application received successfully!");
+            if(response.status==200)
+            {
+                alert("Application received successfully!");
+                setleavetype(""),setfromdate(""),setfromtime(""),settodate(""),settotime(""),setreason("");
+            }
             else console.log("there is an error in submitting the leave application")
           })
         }

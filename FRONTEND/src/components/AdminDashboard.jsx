@@ -8,34 +8,69 @@ import { useNavigate } from "react-router-dom";
 let AdminDashboard = () =>{
 
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  // const[pending,setpending] = useState();
 
   const [leaveRequests,setleaveRequest] = useState([]);
   useEffect(()=>{
    function fetchData()
    {
-    //  axios.get("")
-    //  .then((response)=>{
-    //   if(response.status == 200)
-    //   {
-    //     setLeaveRequest(response.data);
-    //   }
-    //   else
-    //   {
-    //     console.log("There is an problem in fetching leave requests");
-    //   }
-    //  })
-    setleaveRequest([{
-       name:"Rithish",
-       department:"computer science and engineering",
-       fromdate:"05-11-2025",
-       todate:"10-11-2025",
-       reason:"home fest",
-       status:"accepted"
-    }])
+     axios.get("http://localhost:5000/fetchpending")
+     .then((response)=>{
+      if(response.status == 200)
+      {
+        setleaveRequest(response.data);
+      }
+      else
+      {
+        console.log("There is an problem in fetching leave requests");
+      }
+     })
+    // setleaveRequest([{
+    //    name:"Rithish",
+    //    department:"computer science and engineering",
+    //    fromdate:"05-11-2025",
+    //    todate:"10-11-2025",
+    //    reason:"home fest",
+    //    status:"accepted"
+    // }])
   }
   fetchData();
   },[])
+
+  function acceptapplication(id)
+  {
+    axios.patch(`http://localhost:5000/acceptapplication/${id}`,{
+      headers:{"Content-type":"applications/json"}
+    })
+    .then((response)=>{
+      if(response.status == 200)
+      {
+        alert("application accepted!")
+      }
+      else
+      {
+        console.log("There is a problem in accepting the application")
+      }
+    })
+  }
+
+  function rejectapplication(id)
+  {
+    axios.patch(`http://localhost:5000/rejectapplication/${id}`,{
+      headers:{"Content-type":"applications/json"}
+    })
+    .then((response)=>{
+      if(response.status == 200)
+      {
+        alert("application rejected!")
+      }
+      else
+      {
+        console.log("There is a problem in accepting the application");
+      }
+    })
+  }
 
   function handleLogout()
   {
@@ -45,6 +80,7 @@ let AdminDashboard = () =>{
 
   return(
     <div className="bg-black flex justify-center h-screen">
+      <button className="text-blue-600 font-sans font-bold absolute top-5 right-[1430px] cursor-pointer">ADMIN DASHBOARD</button>
        <button className="p-2 bg-blue-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-blue-900" onClick={handleLogout}>Logout</button>
       <div className="mt-8">
          <p className="font-mono text-3xl text-blue-600 relative left-68 mb-6">Leave Requests</p>
@@ -59,8 +95,8 @@ let AdminDashboard = () =>{
              {request.reason}
            </p>
            <div className="flex space-x-2">
-             <button className="text-white bg-green-500 p-2 cursor-pointer hover:bg-green-700 rounded-lg">Accept</button>
-             <button className="text-white bg-red-600 p-1.5 w-16 rounded-lg hover:bg-red-700 cursor-pointer">Reject</button>
+             <button className="text-white bg-green-500 p-2 cursor-pointer hover:bg-green-700 rounded-lg" onClick={acceptapplication}>Accept</button>
+             <button className="text-white bg-red-600 p-1.5 w-16 rounded-lg hover:bg-red-700 cursor-pointer" onClick={rejectapplication}>Reject</button>
            </div>
          </div>         
          ))
