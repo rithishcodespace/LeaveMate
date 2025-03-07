@@ -5,7 +5,7 @@ import ApprovedLeaves from "./components/ApprovedLeaves";
 import LeaveBalance from "./components/LeaveBalance";
 import LeaveHistory from "./components/LeaveHistory";
 import RejectedLeaves from "./components/RejectedLeaves";
-import Notifications from "./components/Notifications";
+// import Notifications from "./components/Notifications";
 import PendingRequest from "./components/PendingRequest";
 import Applyleave from "./components/Applyleave";
 import AdminDashboard from "./components/AdminDashboard";
@@ -51,10 +51,10 @@ const route = createBrowserRouter([
       path:"leavehistory",
       element:<LeaveHistory/>
     },
-    {
-      path:"notifications",
-      element:<Notifications/>
-    },
+    // {
+    //   path:"notifications",
+    //   element:<Notifications/>
+    // },
     {
       path:"rejectedleaves",
       element:<RejectedLeaves/>

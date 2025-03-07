@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../utils/loggedinslice";
+import { addusers } from "../utils/userSlice";
 
 let Login = () =>{
 
@@ -34,6 +35,7 @@ let Login = () =>{
             if(responsedata.status == 200)
             {
               dispatch(login(responsedata.data.role));
+              dispatch(addusers({"name":username,"emailId":emailId}))
               alert(`logedIn successfully as ${responsedata.data.role}`)
               navigate(responsedata.data.role === "student" ? "/dashboard" : "/admin");
             }

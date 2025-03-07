@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import {useState} from "react"
 import axios from "axios";
 import { logout } from "../utils/loggedinslice";
-import {useDispatch} from "react-redux";
+import {useDispatch,useSelector} from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 let AdminDashboard = () =>{
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const selector = useSelector((store)=>store.userSlice)
   // const[pending,setpending] = useState();
 
   const [leaveRequests,setleaveRequest] = useState([]);
@@ -81,8 +82,8 @@ let AdminDashboard = () =>{
          {leaveRequests &&<p className="font-mono text-3xl text-blue-600 relative left-68 mb-6">Leave Requests</p>}
          {leaveRequests && leaveRequests.map((request,index)=>(
            <div key={index} className="w-full sm:w-[800px] bg-slate-900 shadow-blue-700 shadow-lg rounded-md flex flex-wrap sm:flex-nowrap justify-between items-center overflow-y-auto p-3 min-h-[150px]">
-           <p className="p-2 text-white min-w-[100px]">{request.name}</p>
-           <p className="p-2 text-white min-w-[150px]">{request.department}</p>
+           <p className="p-2 text-white min-w-[100px]">{selector.name}</p>
+           <p className="p-2 text-white min-w-[150px]">{selector.emailId}</p>
            <div className="p-2 text-white">
              <p>📅 {request.fromdate} to {request.todate}</p>
            </div>
@@ -90,8 +91,14 @@ let AdminDashboard = () =>{
              {request.reason}
            </p>
            <div className="flex space-x-2">
-             <button className="text-white bg-green-500 p-2 cursor-pointer hover:bg-green-700 rounded-lg" onClick={()=>acceptapplication(request.id)}>Accept</button>
-             <button className="text-white bg-red-600 p-1.5 w-16 rounded-lg hover:bg-red-700 cursor-pointer" onClick={()=>rejectapplication(request.id)}>Reject</button>
+             <button className="text-white bg-green-500 p-2 cursor-pointer hover:bg-green-700 rounded-lg" onClick={()=>{
+              acceptapplication(request.id);
+              fetchData();
+              }}>Accept</button>
+             <button className="text-white bg-red-600 p-1.5 w-16 rounded-lg hover:bg-red-700 cursor-pointer" onClick={()=>{
+              rejectapplication(request.id)
+              fetchData();
+              }}>Reject</button>
            </div>
          </div>         
          ))

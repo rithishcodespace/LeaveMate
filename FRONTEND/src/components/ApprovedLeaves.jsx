@@ -1,6 +1,6 @@
 import {useEffect,useState} from "react"
 import axios from "axios";
-import {useDispatch} from "react-redux";
+import {useDispatch,useSelector} from "react-redux";
 import {useNavigate } from "react-router-dom"
 import { logout } from "../utils/loggedinslice";
 
@@ -9,6 +9,8 @@ let ApprovedLeaves = () =>{
     const[acceptedData,setacceptedData] = useState([]);
     const navigate = useNavigate();
     const dispatch = useDispatch()
+    const selector = useSelector((store)=>store.userSlice);
+    console.log("selector",selector);
 
     useEffect(()=>{
         function fetchData()
@@ -26,6 +28,7 @@ let ApprovedLeaves = () =>{
                      if(response.data.length==0)alert("NO PENDING APPLICATIONS FOUND")
                  }
                 })
+
             }
             catch(error)
             {
@@ -42,13 +45,12 @@ let ApprovedLeaves = () =>{
     }
 
     return(
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center ">
              <button className="p-2 bg-violet-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-violet-900" onClick={handleLogout}>Logout</button>
            <div>
               <table className="border-spacing-1 border-separate border border-violet-600 overflow-x-hidden overflow-y-scroll w-[850px]">
                 <thead>
                     <tr className="border-purple-600 border-b-4 border">
-                        <th className="border border-violet-500 px-4 py-2">S.no</th>
                         <th className="border border-violet-500 px-4 py-2">Name</th>
                         <th className="border border-violet-500 px-4 py-2">EmailId</th>
                         <th className="border border-violet-500 px-4 py-2">From date</th>
@@ -61,9 +63,8 @@ let ApprovedLeaves = () =>{
                         {acceptedData.length!=0 &&
                           acceptedData.map((pending,index)=>(
                              <tr key={index} className="border-purple-600">
-                                <td className="border border-violet-500 px-4 py-2">{pending.id}</td>
-                                <td className="border border-violet-500 px-4 py-2">{pending.name}</td>
-                                <td className="border border-violet-500 px-4 py-2">{pending.department}</td>
+                                <td className="border border-violet-500 px-4 py-2">{selector.name}</td>
+                                <td className="border border-violet-500 px-4 py-2">{selector.emailId}</td>
                                 <td className="border border-violet-500 px-4 py-2">{pending.fromdate}</td>
                                 <td className="border border-violet-500 px-4 py-2">{pending.todate}</td>
                                 <td className="border border-violet-500 px-4 py-2">{pending.reason}</td>

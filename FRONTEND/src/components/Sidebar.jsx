@@ -18,7 +18,7 @@ import { Link,useLocation } from "react-router-dom";
                     <Link to="rejectedleaves"><div className="flex justify-evenly flex-row gap-3 text-purple-500 font-mono cursor-pointer w-56 hover:text-white rounded-lg h-10 pt-2"><img src="https://cdn-icons-png.flaticon.com/512/4336/4336743.png" className="h-8"/><p>Rejected Leaves</p></div></Link>
                     <Link to="leavehistory"><div className="flex justify-evenly flex-row gap-3 text-purple-500 font-mono cursor-pointer w-56 hover:text-white rounded-lg h-10 pt-2"><img src="https://cdn-icons-png.flaticon.com/512/18611/18611084.png" className="h-8"/><p className="relative right-3">Leave history</p></div></Link>
                     <Link to="leavebalance"><div className="flex justify-evenly flex-row gap-3 text-purple-500 font-mono cursor-pointer w-56 hover:text-white rounded-lg h-10 pt-2"><img src="https://cdn-icons-png.freepik.com/512/11137/11137482.png?ga=GA1.1.1183695252.1734422419" className="h-8"/><p className="relative right-3">Leave Balance</p></div></Link>
-                    <Link to="notifications"><div className="flex justify-evenly flex-row gap-3 text-purple-500 font-mono cursor-pointer w-56 hover:text-white rounded-lg h-10 pt-2"><img src="https://cdn-icons-png.flaticon.com/512/17822/17822135.png" className="h-8"/><p className="relative right-3">Notifications</p></div></Link>
+                    {/* <Link to="notifications"><div className="flex justify-evenly flex-row gap-3 text-purple-500 font-mono cursor-pointer w-56 hover:text-white rounded-lg h-10 pt-2"><img src="https://cdn-icons-png.flaticon.com/512/17822/17822135.png" className="h-8"/><p className="relative right-3">Notifications</p></div></Link> */}
                 </div>
             </>
         )

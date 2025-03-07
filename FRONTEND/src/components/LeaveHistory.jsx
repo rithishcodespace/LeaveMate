@@ -41,7 +41,7 @@ let LeaveHistory = () =>{
     }
 
     return(
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center ">
            <button className="p-2 bg-violet-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-violet-900" onClick={handleLogout}>Logout</button>
             <div>
               <p className="text-purple-500 text-3xl font-mono relative left-72 mb-4">Leave History</p>
