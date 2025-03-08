@@ -24,7 +24,7 @@ fetchRoute.get("/accepted",(req,res)=>{
 
 fetchRoute.get("/pending",(req,res)=>{
     try{
-       const sql = "select leavetype, fromdate, fromtime, todate, totime, reason from applications where status = 'pending'";
+       const sql = "select id, leavetype, fromdate, fromtime, todate, totime, reason from applications where status = 'pending'";
        db.query(sql,(error,result)=>{
           if(error)
           {

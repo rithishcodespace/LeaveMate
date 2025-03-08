@@ -46,6 +46,10 @@ let Signup = () =>{
         catch(error)
         {
            console.error("There is an error in sign up user",error)
+           document.getElementById(username).value="";
+           document.getElementById(password).value="";
+           document.getElementById(emailId).value="";
+           document.getElementById(role).value="";
         }
     }
 
@@ -58,6 +62,7 @@ let Signup = () =>{
           <input
           ref={usernameRef}
           type="text"
+          id="username"
           placeholder="Username"
           className="bg-gray-700 text-white px-4 py-3 rounded-md w-full mb-3 h-12 outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-400"
           />
@@ -65,6 +70,7 @@ let Signup = () =>{
           <input
           ref={roleRef}
           type="text"
+          id="role"
           placeholder="Role"
           className="bg-gray-700 text-white px-4 py-3 rounded-md w-full mb-4 h-12 outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-400"
           />
@@ -72,13 +78,15 @@ let Signup = () =>{
           <input
           ref={emailRef}
           type="text"
+          id="email"
           placeholder="Email ID"
           className="bg-gray-700 text-white px-4 py-3 rounded-md w-full mb-3 h-12 outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-400"
           />
 
           <input
           ref={passRef}
-          type="text"
+          type="password"
+          id="password"
           placeholder="Password"
           className="bg-gray-700 text-white px-4 py-3 rounded-md w-full mb-4 h-12 outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-400"
           />

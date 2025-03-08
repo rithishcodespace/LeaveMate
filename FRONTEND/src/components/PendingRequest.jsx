@@ -41,6 +41,24 @@ let PendingRequest = () =>{
         navigate("/login");
     }
 
+    function handelDelete(id)
+    {
+       axios.delete(`http://localhost:5000/deleteleave/${id}`,{
+        headers:{"Content-Type":"application/json"}
+       }) 
+       .then((response)=>{
+        if(response.status == 200)
+        {
+            setpendingData(pendingData.filter((item) => item.id !== id));
+            alert("application deleted successfully");
+        }
+        else{
+            console.log("there is an error")
+        }
+        
+       })
+    }
+
     return(
         <div className="flex items-center justify-center ">
              <button className="p-2 bg-violet-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-violet-900" onClick={handleLogout}>Logout</button>
@@ -54,6 +72,8 @@ let PendingRequest = () =>{
                         <th className="border border-violet-500 px-4 py-2">To date</th>
                         <th className="border border-violet-500 px-4 py-2">Reason</th>
                         <th className="border border-violet-500 px-4 py-2">Status</th>
+                        <th className="border border-violet-500 px-4 py-2">Actions</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -66,6 +86,8 @@ let PendingRequest = () =>{
                                 <td className="border border-violet-500 px-4 py-2">{pending.todate}</td>
                                 <td className="border border-violet-500 px-4 py-2">{pending.reason}</td>
                                 <td className="border border-violet-500 px-4 py-2 bg-yellow-600">pending</td>
+                                <td className="border border-violet-500 px-4 py-2 bg-red-500 cursor-pointer" onClick={()=>handelDelete(pending.id)}>Delete</td>
+
                              </tr>
                           ))
                         }

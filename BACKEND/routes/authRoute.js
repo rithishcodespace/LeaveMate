@@ -35,4 +35,5 @@ authRoute.post("/addUser",(req,res)=>{
     }
 })
 
+
 module.exports = authRoute;

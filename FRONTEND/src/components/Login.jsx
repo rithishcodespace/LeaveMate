@@ -36,8 +36,20 @@ let Login = () =>{
             {
               dispatch(login(responsedata.data.role));
               dispatch(addusers({"name":username,"emailId":emailId}))
-              alert(`logedIn successfully as ${responsedata.data.role}`)
-              navigate(responsedata.data.role === "student" ? "/dashboard" : "/admin");
+              if(responsedata.data.role == "student" || responsedata.data.role == "admin")
+              {
+                alert(`logedIn successfully as ${responsedata.data.role}`)
+                navigate(responsedata.data.role === "student" ? "/dashboard" : "/admin");
+              }
+              else
+              {
+                alert("Invalid credentials");
+                document.getElementById(username).value="";
+                document.getElementById(password).value="";
+                document.getElementById(emailId).value="";
+                navigate("/login");
+
+              }
             }
             else
             {
@@ -58,25 +70,28 @@ let Login = () =>{
             ref={usernameRef}
             type="text"
             placeholder="Username"
+            id="username"
             className="bg-gray-700 text-white px-4 py-3 rounded-md w-full mb-3 h-12 outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-400"
             />
 
             <input
             ref={emailRef}
             type="text"
+            id="emailId"
             placeholder="Email ID"
             className="bg-gray-700 text-white px-4 py-3 rounded-md w-full mb-3 h-12 outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-400"
             />
 
             <input
             ref={passRef}
-            type="text"
+            type="password"
+            id="password"
             placeholder="Password"
             className="bg-gray-700 text-white px-4 py-3 rounded-md w-full mb-4 h-12 outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-400"
             />
 
             <button
-            className="bg-purple-500 hover:bg-purple-600 transition-all duration-200 w-full h-12 rounded-md text-white text-lg font-medium shadow-md hover:shadow-lg"
+            className="bg-purple-500 hover:bg-purple-600 transition-all cursor-pointer duration-200 w-full h-12 rounded-md text-white text-lg font-medium shadow-md hover:shadow-lg"
             onClick={handleLogin}
             >Login</button>
 

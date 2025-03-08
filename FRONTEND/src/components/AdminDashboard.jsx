@@ -40,7 +40,10 @@ let AdminDashboard = () =>{
     .then((response)=>{
       if(response.status == 200)
       {
-        alert("application accepted!")
+        alert("application accepted!");
+        setleaveRequest((prevRequests) =>
+          prevRequests.filter((request) => request.id !== id)
+        );
       }
       else
       {
@@ -59,7 +62,10 @@ let AdminDashboard = () =>{
     .then((response)=>{
       if(response.status == 200)
       {
-        alert("application rejected!")
+        alert("application rejected!");
+        setleaveRequest((prevRequests) =>
+          prevRequests.filter((request) => request.id !== id)
+        );
       }
       else
       {
@@ -76,33 +82,45 @@ let AdminDashboard = () =>{
 
   return(
     <div className="bg-black flex justify-center h-screen overflow-auto">
-      <button className="text-blue-600 font-sans font-bold absolute top-5 right-[1430px] cursor-pointer">ADMIN DASHBOARD</button>
+      <button className="text-blue-600 font-serif font-bold absolute top-5 right-[1410px] cursor-pointer">ADMIN DASHBOARD</button>
        <button className="p-2 bg-blue-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-blue-900" onClick={handleLogout}>Logout</button>
       <div className="mt-8">
-         {leaveRequests &&<p className="font-mono text-3xl text-blue-600 relative left-68 mb-6">Leave Requests</p>}
+         {leaveRequests.length!=0 &&<p className="font-mono text-3xl text-blue-600 relative left-68 mb-6">Leave Requests</p>}
          {leaveRequests && leaveRequests.map((request,index)=>(
-           <div key={index} className="h-auto w-[800px] bg-slate-900 hover:scale-105 duration-300 shadow-sm shadow-blue-600 rounded-md m-5">
-           <p className="p-2 text-white min-w-[100px]">{selector.name}</p>
-           <p className="p-2 text-white min-w-[150px]">{selector.emailId}</p>
-           <div className="p-2 text-white">
-             <p>📅 {request.fromdate} to {request.todate}</p>
-           </div>
-           <p className="p-2 text-white w-32 sm:w-44 lg:w-52 truncate whitespace-normal break-words">
-             {request.reason}
-           </p>
-           <div className="flex space-x-2">
-             <button className="text-white bg-green-500 p-2 cursor-pointer hover:bg-green-700 rounded-lg" onClick={()=>{
-              acceptapplication(request.id);
-              fetchData();
-              }}>Accept</button>
-             <button className="text-white bg-red-600 p-1.5 w-16 rounded-lg hover:bg-red-700 cursor-pointer" onClick={()=>{
-              rejectapplication(request.id)
-              fetchData();
-              }}>Reject</button>
-           </div>
-         </div>         
-         ))
-         
+          <div key={index} className="h-auto w-[800px] bg-slate-900 hover:scale-105 duration-300 shadow-md shadow-blue-600 rounded-lg m-5 p-4 flex flex-wrap items-center gap-3 overflow-hidden">
+          {/* User Details */}
+          <p className="text-white font-medium min-w-[120px]">{request.name}</p>
+          <p className="text-white min-w-[180px] break-all">{request.emailId}</p>
+        
+          {/* Date Range */}
+          <div className="text-white flex items-center">
+            <p>📅 {request.fromdate} - {request.todate}</p>
+          </div>
+        
+          {/* Reason (Handles long text properly) */}
+          <p className="text-white flex-1 min-w-[200px] w-full sm:w-60 lg:w-72 break-words whitespace-normal bg-gray-800 p-2 rounded-md">
+            {request.reason}
+          </p>
+        
+          {/* Buttons */}
+          <div className="flex space-x-3">
+            <button className="text-white bg-green-500 px-4 py-2 rounded-lg hover:bg-green-700 transition" 
+              onClick={() => acceptapplication(request.id)}>
+              Accept
+            </button>
+            <button className="text-white bg-red-600 px-4 py-2 rounded-lg hover:bg-red-700 transition" 
+              onClick={() => rejectapplication(request.id)}>
+              Reject
+            </button>
+          </div>
+        </div>
+            
+         ))}
+         {
+          leaveRequests.length==0 &&
+          <div className="flex justify-center items relative top-56">
+             <p className="font-light text-4xl text-white">NO PENDING APPLICATIONS FOUND</p>
+          </div> 
          }
       </div>
     </div>
