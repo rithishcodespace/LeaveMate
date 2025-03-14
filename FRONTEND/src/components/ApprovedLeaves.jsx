@@ -46,9 +46,9 @@ let ApprovedLeaves = () =>{
     return(
         <div className="flex items-center justify-center ">
              <button className="p-2 bg-violet-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-violet-900" onClick={handleLogout}>Logout</button>
-           <div>
+           <div className="h-[650px] w-auto overflow-y-auto">
            {acceptedData.length!=0 && <table className="border-spacing-1 border-separate border border-violet-600 overflow-x-hidden overflow-y-scroll w-[850px]">
-               <thead>
+               <thead className="sticky top-0 bg-purple-400">
                     <tr className="border-purple-600 border-b-4 border">
                         <th className="border border-violet-500 px-4 py-2">Name</th>
                         <th className="border border-violet-500 px-4 py-2">EmailId</th>

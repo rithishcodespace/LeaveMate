@@ -74,11 +74,11 @@ const Applyleave = () => {
             <tr className="border-b border-purple-600">
                 <td className="py-3 px-4 text-left font-semibold">Leave Type</td>
                 <td className="py-3 px-4">
-                  <select className=" bg-gray-800 h-10 w-80 rounded-md border-purple border-[0.8px]">
-                    <option onClick={()=>setleavetype("emergency")}>emergencey</option>
-                    <option onClick={()=>setleavetype("personal")}>personal</option>
-                    <option onClick={()=>setleavetype("General Permission")}>General Permission</option>
-                    <option onClick={()=>setleavetype("O.D")}>O.D</option>
+                  <select className=" bg-gray-800 h-10 w-80 rounded-md border-purple border-[0.8px]" onChange={(e)=>setleavetype(e.target.value)}>
+                    <option>emergencey</option>
+                    <option>personal</option>
+                    <option>General Permission</option>
+                    <option>O.D</option>
                   </select>
                   </td>
             </tr>

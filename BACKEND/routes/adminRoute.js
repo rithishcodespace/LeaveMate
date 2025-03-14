@@ -1,6 +1,7 @@
 const express = require("express");
 const adminRoute = express.Router();
 const db = require("../database");
+const nodemailer = require("nodemailer");
 
 adminRoute.patch("/acceptapplication/:id",(req,res)=>{
     try{
@@ -11,10 +12,22 @@ adminRoute.patch("/acceptapplication/:id",(req,res)=>{
         {
             res.status(500).send({"errorMessage":error})
         }
-        else{
-            res.send("status updated successfully!");
-        }
       })
+      const transporter = nodemailer.createTransport({
+        service:"gmail",
+        auth:{
+          user:"rithishvkv@gmail.com",
+          pass:"ncwbsvgspuplvzzr"
+        }
+      });
+      const mailOptions = {
+        from:"rithishvkv@gmail.com",
+        to:"rithishcodespace@gmail.com",
+        subject:"Leave Application Status",
+        text:"Your Leave Application was Approved by Mentor"
+      }
+      transporter.sendMail(mailOptions);
+      res.send("Leave Approved successfully and then the mail was sent to the applicant!")
     }
     catch(error)
     {

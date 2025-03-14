@@ -4,7 +4,7 @@ const db = require("../database");
 
 applyleaveRoute.post("/applyleave",(req,res)=>{
   try{
-    const sql = "insert into applications (leavetype, fromdate, fromtime, todate, totime, reason) values(?,?,?,?,?,?,?,?)";
+    const sql = "insert into applications (leavetype, fromdate, fromtime, todate, totime, reason, name, emailId) values(?,?,?,?,?,?,?,?)";
     const values = [req.body.leavetype,req.body.fromdate,req.body.fromtime,req.body.todate,req.body.totime,req.body.reason,req.body.name,req.body.emailId];
     db.query(sql,values,(error,result)=>{
         if(error)
