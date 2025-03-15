@@ -18,7 +18,7 @@ let Login = () =>{
         const username = usernameRef.current.value;
         const emailId = emailRef.current.value;
         const password = passRef.current.value;
-        axios.post("http://localhost:5000/auth/login",{username,emailId,password},{
+        axios.post("http://localhost:500x0/auth/login",{username,emailId,password},{
             headers:{"Content-Type":"application/json"}
         })
         .then((response)=>{

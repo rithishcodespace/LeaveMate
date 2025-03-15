@@ -3,6 +3,7 @@ import axios from "axios";
 import {useDispatch,useSelector} from "react-redux";
 import {useNavigate } from "react-router-dom"
 import { logout } from "../utils/loggedinslice";
+import { addacceptedleaves } from "../utils/leavebalance";
 
 let ApprovedLeaves = () =>{
 
@@ -36,6 +37,10 @@ let ApprovedLeaves = () =>{
         }
         fetchData();
     },[]);
+
+    useEffect(()=>{
+        dispatch(addacceptedleaves(acceptedData.length))
+    },[acceptedData])
 
     function handleLogout()
     {

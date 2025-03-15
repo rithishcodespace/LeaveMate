@@ -1,15 +1,14 @@
-import { useState } from "react";
+import {useState} from "react";
+import { useNavigate,useParams } from "react-router-dom";
 import axios from "axios";
-import {useDispatch,useSelector} from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout } from "../utils/loggedinslice";
-import { useNavigate } from "react-router-dom";
 
+let Editpage = () =>{
 
-const Applyleave = () => {
-
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const selector = useSelector((store)=>store.userSlice)
+    const dispatch = useDispatch();
+    const {id} = useParams();
 
     const[leavetype,setleavetype] = useState("");
     const[fromdate,setfromdate] = useState("");
@@ -17,36 +16,24 @@ const Applyleave = () => {
     const[todate,settodate] = useState("");
     const[totime,settotime] = useState("");
     const[reason,setreason] = useState("");
-    const[name,setname] = useState(selector.name);
-    const[emailId,setemailId] = useState(selector.emailId);
 
-    async function handleClick()
+    function handleClick()
     {
-      try{
-        if(leavetype.trim()!="" && fromdate.trim()!="" && fromtime.trim()!="" && todate.trim()!="" && totime.trim()!="" && reason.trim()!="")
-        {
-          axios.post("http://localhost:5000/applyleave",{leavetype,fromdate,fromtime,todate,totime,reason,name,emailId},{
-            headers:{"Content-Type":"application/json"}
-          })
-          .then((response)=>{
-            if(response.status==200)
-            {
-                alert("Application received successfully!");
-                setTimeout(()=>navigate("/dashboard/pendingrequest"),1000)
-            }
-            else console.log("there is an error in submitting the leave application")
-          })
-        }
-        else
-        {
-          alert("Fill all the fields!")
-        }
-      }
-      catch(error)
-      {
-        console.log(error);
-      }
-        
+        axios.patch(`http://localhost:5000/edit/${id}`,
+          {"leavetype":leavetype,"fromdate":fromdate,"fromtime":fromtime,"todate":todate,"totime":totime,"reason":reason},
+          {headers:{"Content-Type":"application/json"}}
+        )
+        .then((response)=>{
+          if(response.status == 200)
+          {
+            alert("Application updated successfully");
+            setTimeout(()=>navigate("/dashboard/pendingrequest"));
+          }
+          else
+          {
+            alert("An error occured while updating application details")
+          }
+        })
     }
 
     function handleLogout()
@@ -55,16 +42,16 @@ const Applyleave = () => {
       navigate("/login");
     }
 
-
-    return (
-      <div className="flex justify-center items-center h-screen bg-black text-white max-w-screen">
+  return(
+    <div className="flex justify-center items-center h-screen bg-black text-white max-w-screen">
       <button className="p-2 bg-violet-600 text-black font-serif absolute top-5 left-[1430px] rounded-lg cursor-pointer hover:bg-violet-900" onClick={handleLogout}>Logout</button>
+      <button className="absolute top-5 left-6.5 text-black bg-violet-600 rounded-lg p-2 hover:bg-violet-400 cursor-pointer" onClick={()=>navigate("/dashboard/pendingrequest")}>back</button>
         <div className="bg-[#1a1a2e] p-8 rounded-xl shadow-lg w-[500px] mb-8">
           <h2 className="text-xl font-bold text-purple-400 text-center mb-4">
-            Apply for Leave
+            Edit Application
           </h2>
           
-          <table className="w-full mx-auto bg-gray-900 text-purple-400 border border-purple-600 rounded-lg shadow-lg">
+    <table className="w-full mx-auto bg-gray-900 text-purple-400 border border-purple-600 rounded-lg shadow-lg">
         <tbody>
             <tr className="border-b border-purple-600">
                 <td className="py-3 px-4 text-left font-semibold">Leave Type</td>
@@ -98,16 +85,15 @@ const Applyleave = () => {
                 <td className="py-3 px-4"><input type="text" id="reason" className="input-field w-full p-2 border border-purple-500 rounded-lg bg-gray-800 text-white" onChange={(e)=>setreason(e.target.value)}/></td>
             </tr>
         </tbody>
-</table>
+    </table>
 
   
           <button onClick={handleClick} className="cursor-pointer w-full mt-4 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg transition">
-            Submit
+            Submit Changes
           </button>
         </div>
       </div>
-    );
-  };
-  
-  export default Applyleave;
-  
+  )
+}
+
+export default Editpage;

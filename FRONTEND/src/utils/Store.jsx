@@ -1,11 +1,13 @@
 import {configureStore} from "@reduxjs/toolkit";
 import loggedinslicereducer from "./loggedinslice";
 import userreducer from "./userSlice";
+import leavebalancereducer from "./leavebalance"
 
 const store = configureStore({
     reducer:{
       loggedinslice:loggedinslicereducer,
-      userSlice:userreducer
+      userSlice:userreducer,
+      leavebalance:leavebalancereducer,
     }
 })
 

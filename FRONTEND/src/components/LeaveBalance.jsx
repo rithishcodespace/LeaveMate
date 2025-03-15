@@ -5,27 +5,28 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../utils/loggedinslice";
+import { useSelector } from "react-redux";
 
 const LeaveBalance = () => {
   const [leavePercentage, setLeavePercentage] = useState(75);
   const [quote, setQuote] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const selector = useSelector((state)=>state.leavebalance.acceptedleaves);
 
   useEffect(() => {
-    setTimeout(() => {
-      const newPercentage = 40; // Example dynamic value
+      const newPercentage = 120-selector;
+      console.log("newPercentage:",newPercentage)
       setLeavePercentage(newPercentage);
 
-      if (newPercentage > 75) {
+      if (newPercentage > 85) {
         setQuote("✅ You're in a safe zone!");
-      } else if (newPercentage >= 50) {
+      } else if (newPercentage >= 80) {
         setQuote("⚠️ Be careful, balance wisely!");
       } else {
         setQuote("🚨 You're at risk of low attendance!");
       }
-    }, 1000);
-  }, []);
+  }, [selector]);
 
   function handleLogout()
   {
@@ -47,10 +48,14 @@ const LeaveBalance = () => {
         >
           <CardContent>
             <Typography variant="h5" className="text-purple-400 font-semibold text-center">
-              Leave Balance
+              Total Working Days : 120
             </Typography>
+            <Typography variant="h5" className="text-purple-400 font-semibold text-center">
+              Attendence : {((120-selector)/120)*100}%
+            </Typography>
+
             <Typography variant="h6" className="text-gray-500 text-center mt-2">
-              Remaining: {leavePercentage}%
+              Available Leave : {(24-selector > 0)?24-selector:0}
             </Typography>
             
             <Box className="mt-4 bg-gray-900 p-2 rounded-lg ">

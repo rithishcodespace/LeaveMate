@@ -14,7 +14,7 @@ let LeaveHistory = () =>{
         function getData()
         {
             try{
-                axios.get("http://localhost:5000/history")
+                axios.get("http://locazlhost:5000/history")
                 .then((response)=>{
                     if(response.status != 200 || response.data.length<0)
                     {
@@ -49,7 +49,7 @@ let LeaveHistory = () =>{
     
     {history.length !== 0 &&
       history.map((item, index) => (
-        <div key={index} className="h-auto w-[800px] bg-slate-900 hover:scale-105 duration-300 shadow-sm shadow-violet-500 rounded-md m-5">
+        <div key={index} className="h-autoz w-[800px] bg-slate-900 hover:scale-105 duration-300 shadow-sm shadow-violet-500 rounded-md m-5">
           <div className="p-2">
             <p>📅 {item.fromdate} to {item.todate}</p>
           </div>

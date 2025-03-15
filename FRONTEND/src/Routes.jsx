@@ -5,12 +5,12 @@ import ApprovedLeaves from "./components/ApprovedLeaves";
 import LeaveBalance from "./components/LeaveBalance";
 import LeaveHistory from "./components/LeaveHistory";
 import RejectedLeaves from "./components/RejectedLeaves";
-// import Notifications from "./components/Notifications";
 import PendingRequest from "./components/PendingRequest";
 import Applyleave from "./components/Applyleave";
 import AdminDashboard from "./components/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Signup from "./components/signup"
+import Editpage from "./components/Editpage";
 
 
 const route = createBrowserRouter([
@@ -64,6 +64,10 @@ const route = createBrowserRouter([
 {
   path:"/admin",
   element:<ProtectedRoute allowedRoles={["admin"]}><AdminDashboard/></ProtectedRoute>
+},
+{
+  path:"/editpage/:id",
+  element:<ProtectedRoute allowedRoles={["student"]}><Editpage/></ProtectedRoute>
 }
 ])
 

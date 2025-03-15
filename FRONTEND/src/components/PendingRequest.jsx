@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { logout } from "../utils/loggedinslice";
 
+
 let PendingRequest = () =>{
 
     const[pendingData,setpendingData] = useState([]);
@@ -41,7 +42,7 @@ let PendingRequest = () =>{
         navigate("/login");
     }
 
-    function handelDelete(id)
+    function handleDelete(id)
     {
        axios.delete(`http://localhost:5000/deleteleave/${id}`,{
         headers:{"Content-Type":"application/json"}
@@ -85,8 +86,11 @@ let PendingRequest = () =>{
                                 <td className="border border-violet-500 px-4 py-2">{pending.fromdate}</td>
                                 <td className="border border-violet-500 px-4 py-2">{pending.todate}</td>
                                 <td className="border border-violet-500 px-4 py-2">{pending.reason}</td>
-                                <td className="border border-violet-500 px-4 py-2 bg-yellow-600">pending</td>
-                                <td className="border border-violet-500 px-4 py-2 bg-red-500 cursor-pointer" onClick={()=>handelDelete(pending.id)}>Delete</td>
+                                <td className="border border-violet-500 px-4 py-2 bg-yellow-500">pending</td>
+                                <td className="flex justify-around items-center">
+                                    <button className="bg-red-500 cursor-pointer rounded-md  m-1 w-16 h-10" onClick={()=>handleDelete(pending.id)}>Delete</button>
+                                    <button className="bg-orange-500 cursor-pointer rounded-md m-1 w-16 h-10" onClick={()=>navigate(`/editpage/${pending.id}`)}>Edit</button>
+                                </td>
 
                              </tr>
                           ))
